@@ -1,4 +1,4 @@
-package com.example.labprog7;
+package com.example.parsingxmljson;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -47,7 +47,7 @@ public class ViewDataActivity extends AppCompatActivity {
                     Node node = nList.item(i);
                     if (node.getNodeType() == Node.ELEMENT_NODE) {
                         Element element2 = (Element) node;
-                        xmlContentTextView.setText(xmlContentTextView.getText() + "City Name : " + getValue("City_Name", element2) + "\n");
+                        xmlContentTextView.setText(xmlContentTextView.getText() + "\nCity Name : " + getValue("City_Name", element2) + "\n");
                         xmlContentTextView.setText(xmlContentTextView.getText() + "Latitude : " + getValue("Latitude", element2) + "\n");
                         xmlContentTextView.setText(xmlContentTextView.getText() + "Longitude : " + getValue("Longitude", element2) + "\n");
                         xmlContentTextView.setText(xmlContentTextView.getText() + "Temperature : " + getValue("Temperature", element2) + "\n");
@@ -69,19 +69,19 @@ public class ViewDataActivity extends AppCompatActivity {
     private void parseJSON() {
         try {
             InputStream inputStream=getAssets().open("weather.json");
-            {
+
                 byte[] data=new byte[inputStream.available()];
                 inputStream.read(data);
                 String jsonString=new String(data);
                 JSONObject jsonObject=new JSONObject(jsonString);
                 JSONObject weather=jsonObject.getJSONObject("weather");
                 jsonContentTextView.setText("City-Name:"+weather.getString("City_Name")+"\n");
-                jsonContentTextView.setText("Latitude:"+weather.getString("Latitude")+"\n");
-                jsonContentTextView.setText("Longitude:"+weather.getString("Longitude")+"\n");
-                jsonContentTextView.setText("Temperature:"+weather.getString("Temperature")+"\n");
-                jsonContentTextView.setText("Humidity:"+weather.getString("Humidity")+"\n");
+                jsonContentTextView.append("Latitude:"+weather.getString("Latitude")+"\n");
+                jsonContentTextView.append("Longitude:"+weather.getString("Longitude")+"\n");
+                jsonContentTextView.append("Temperature:"+weather.getString("Temperature")+"\n");
+                jsonContentTextView.append("Humidity:"+weather.getString("Humidity")+"\n");
 
-            }
+
         }catch (Exception e) {
             e.printStackTrace();
         }
